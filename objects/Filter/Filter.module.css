@@ -1,0 +1,25 @@
+.card {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem;
+    display: block; 
+    height: 100%;
+}
+
+.card-input input{
+    padding: 0.5rem 0.75rem !important;
+}
+
+/* .card-input {
+    padding: 0.5rem 0.75rem;
+} */
+
+.card select {
+    padding: 0.5rem 0.75rem; 
+    width: 50%;
+    height: 100%;
+}
+
+.action {
+    margin-top: 1rem;
+}
+

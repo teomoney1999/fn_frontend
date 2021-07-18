@@ -1,0 +1,52 @@
+.notification {
+    position: fixed;
+    border: 1px solid black;
+    top: 6rem;
+    right: 1rem;
+    z-index: 10;
+    width: 16rem;
+    min-width: 16rem;
+    padding: 0 1rem;
+    animation: notification-appear 1s ease-out forwards;
+}
+
+.notification h4 {
+    font-weight: 400;
+}
+
+.success {
+    background: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.danger{
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    /* #dc3545 */
+}
+
+.warning {
+    background: #ffc107;
+    border-color: #ffc107;
+    color: black;
+}
+
+.pending {
+    background: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+@keyframes notification-appear {
+    from {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+    
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

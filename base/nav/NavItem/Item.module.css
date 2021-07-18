@@ -1,0 +1,25 @@
+.NavItem {
+    /* border: 2px solid rgba(112,219,112,1); */
+    height: 3vh;
+    margin: 1rem 0;
+    padding: 1rem 1rem;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    background: #248f24;
+}
+
+.img {
+    margin-right: 1rem;
+    color: white;
+}
+
+.title {
+    color: white; 
+    font-size: 1rem;
+}
+
+.active {
+    
+    background: rgba(112,219,112,1);
+}

@@ -1,0 +1,47 @@
+.control {
+    margin: 1rem 0; 
+    display: flex; 
+    align-items: stretch;
+    flex-direction: column;
+    text-align: left;
+}
+
+.control label, 
+.control input {
+    display: block; 
+}
+
+.control label {
+    font-weight: bold;
+    flex: 1; 
+    color: black; 
+    margin-bottom: 0.5rem;
+}
+
+.control lable:hover {
+    color: #8600b3;
+}
+
+.control input {
+    flex: 3; 
+    padding: 0.35rem 0.35rem;
+    border-radius: 6px;
+    border: 1px solid #ccc; 
+}
+
+.control input:focus {
+    outline: none; 
+    border-color: #8600b3; 
+    background: #f6dbfc;
+}
+
+.control.invalid input {
+    background: #fbdada;
+    border-color: red; 
+}
+
+.error {
+    color: red; 
+    font-weight: 400;
+    font-size: 12px;
+}

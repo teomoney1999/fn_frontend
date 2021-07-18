@@ -1,0 +1,37 @@
+
+
+.button {
+    padding: 0.5rem; 
+    border: 1px solid; 
+    font-weight: bold;
+    /* 
+        Border color 
+        Color 
+        Background 
+            is set on specific button class */
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid; 
+}
+
+.button:hover, 
+.button:active {
+    /* Set on specific button class */
+}
+
+.button:focus {
+    outline: 0;
+}
+
+.portalBtn {
+    position: fixed; 
+    bottom: 0;
+    margin: 1rem;
+    height: 3rem; 
+    width: 3rem;
+    border-radius: 24px;
+    background: linear-gradient(257deg, rgba(112,219,112,1) 21%, rgba(36,143,36,1) 100%);
+    box-shadow: 2px 3px 8px white;
+    border: none; 
+}
+

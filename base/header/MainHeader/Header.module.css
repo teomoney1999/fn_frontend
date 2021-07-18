@@ -1,0 +1,31 @@
+
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; 
+    /* width: 93%; */
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background: #8600b3; */
+    /* background: rgb(112,219,112); */
+    background: linear-gradient(257deg, rgba(112,219,112,1) 21%, rgba(36,143,36,1) 100%);
+    padding: 0 1.5rem;
+}
+
+.Header h1 {
+    color: white;
+}
+
+.fa .fa-bars{
+    color: white !important; 
+}
+
+.navBtn {
+    background: transparent;
+    color: white;
+    border: none;
+}
+

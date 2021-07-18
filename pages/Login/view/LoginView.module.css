@@ -1,0 +1,42 @@
+.login {
+    margin: 4rem 1rem; 
+    text-align: center;
+    padding: 1rem;
+}
+
+.login img {
+    height: 8rem; 
+    width: 8rem;
+    margin: 0 5rem; 
+}
+
+.login h2 {
+    margin: 0 0 1.5rem 0 !important;
+    color: rgba(36,143,36,1);
+    font-weight: 400;
+}
+
+
+.action {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.btn {
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(257deg, rgba(112,219,112,1) 21%, rgba(36,143,36,1) 100%);
+    color: white; 
+}
+
+.btn:hover {
+    background: #c61aff;
+}
+
+.redirect {
+    margin-top: 1.5rem;
+}
+.redirect p {
+    font-size: 12px;
+    font-weight: 400;
+}
+

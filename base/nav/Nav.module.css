@@ -1,0 +1,28 @@
+.nav {
+    position: fixed; 
+    top: 0; 
+    background-color: white;
+    border-radius: 0 30px 24px 0;
+    width: 70%;
+    height: 100vh;
+    z-index: 30;
+}
+
+.greeding {
+    /* border: 1px solid black; */
+    border-top-right-radius: 30px;
+    background: linear-gradient(257deg, rgba(112,219,112,1) 21%, rgba(36,143,36,1) 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+
+}
+
+.greeding h2 {
+    font-weight: 300;
+} 
+
+.greeding h3 {
+    font-weight: 600;
+}
+

@@ -1,0 +1,28 @@
+.spinner {
+  position: fixed; 
+  top: 15rem;
+  left: 10rem;
+  width: 80px;
+  height: 80px;
+  z-index: 30;
+}
+.spinner:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid rgba(36,143,36,1);
+  border-color: rgba(36,143,36,1) transparent rgba(112,219,112,1) transparent ;
+  animation: spinner 1.2s linear infinite;
+  z-index: 30;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
