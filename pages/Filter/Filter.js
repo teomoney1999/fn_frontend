@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 // REDUX
 import { useDispatch, useSelector } from 'react-redux';
 import { filterAction } from '../../stores/filter/filter-slice';
@@ -6,6 +6,7 @@ import { filterAction } from '../../stores/filter/filter-slice';
 import formattingHelper from '../../helpers/formatingHelper';
 // COMPONENT
 import FilterView from '../../objects/Filter/Filter';
+// const FilterView = lazy(() => import('../../objects/Filter/Filter'));
 
 const Filter = (props) => {
     const dispatch = useDispatch();
