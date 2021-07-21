@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import avaLogo from '../../../assets/unknown user.png';
 import avaLogo from '../../../assets/avatar.jpg';
 
 import classes from './UserInfo.module.css';

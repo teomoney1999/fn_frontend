@@ -15,15 +15,9 @@ const Filter = (props) => {
     const [value, setValue] = useState([new Date(), new Date()]);
     const [isValueTouched, setIsValueTouched] = useState(false);
 
-
     const [type, setType] = useState('thu');
 
-    let filterPattern = {}; 
-    if (isValueTouched) {
-        filterPattern = { type, date: value }
-    } else {
-        filterPattern = { type }
-    }
+    let filterPattern = isValueTouched ? { type, date: value } : { type }; 
 
     // EVENT HANDLER
     const onChangeType = (event) => {

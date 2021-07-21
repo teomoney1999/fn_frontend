@@ -7,6 +7,10 @@ export const requestHandler = async (requestConfig) => {
         method: requestConfig.method ? requestConfig.method : 'GET', 
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE',
+            // 'Origin': '*',
+            // 'Access-Control-Allow-Credentials': 'true'
+            // 'Access-Control-Allow-Headers': 'Content-Type'
         }, 
         body: requestConfig.body ? JSON.stringify(requestConfig.body) : null
     });

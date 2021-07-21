@@ -63,7 +63,7 @@ const ModelView = (props) => {
     }
 
     // FETCH DATA
-    const { transaction, urlParam } = props;
+    const { transaction } = props;
     useEffect(() => {   
         const { id: idProp, 
             name: nameProp, 
@@ -84,11 +84,15 @@ const ModelView = (props) => {
     // NOTIFY
     const { error, status } = props;
     useEffect(() => {
-        if (status === 'completed' && error) {
-            dispatch(props.notify({message: error, type: 'danger'})); 
-        } else if (status === 'completed' && !error) {
-            dispatch(props.notify({message: "Lưu thông tin thành công!", type: "success"}));
-        } 
+        if (status !== 'completed') {
+            return; 
+        }
+
+        if (!error) {
+            props.notify({message: "Lưu thông tin thành công!", type: "success"}); 
+        } else {
+            props.notify({message: error, type: 'danger'});
+        }
     }, [error, status]);
 
     /**
@@ -107,6 +111,11 @@ const ModelView = (props) => {
     const submitHandler = (event) => {
         event.preventDefault(); 
         
+        if (!formIsValid) {
+            props.notify({message: "Vui lòng điền đầy đủ thông tin!", type: 'danger'});
+            return; 
+        }
+
         /**
          * Save info 
          */        
@@ -117,28 +126,23 @@ const ModelView = (props) => {
             description: description,
             user_id: userId,
         }
-        
-        if (formIsValid){
-            if (transactionId) {
-                if (isDelete) {
-                    props.onDeleteTransaction(transactionId);
-                    setIsDelete(false);
-                } else {
-                    props.onUpdateTransaction(transactionId, data);
-                }          
-            } else {
-                props.onCreateTransaction(data);
-            }  
-            /**
-             * Reset input 
-             */
-            nameReset();
-            amountReset();
-            setType('thu'); 
-            descriptionReset();
+
+        if (!transactionId) {
+            props.onCreateTransaction(data);
+        } else if (!isDelete) {
+            props.onUpdateTransaction(transactionId, data);   
         } else {
-            dispatch(props.notify({message: "Vui lòng điền đầy đủ thông tin!", type: 'danger'}));
+            props.onDeleteTransaction(transactionId);
+            setIsDelete(false);
         }
+
+        /**
+         * Reset input 
+         */
+        nameReset();
+        amountReset();
+        setType('thu'); 
+        descriptionReset();
     };
 
     return (

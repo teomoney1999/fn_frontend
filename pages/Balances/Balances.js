@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState, useMemo } from "react";
 // REACT ROUTER
 import { useHistory } from "react-router";
 // REDUX
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { notificationAction } from "../../stores/notification-slice";
 // CUSTOM HOOK
 import useHttp from "../../hooks/use-http";
@@ -21,6 +21,8 @@ const Balances = (props) => {
     // HOOKS
     const history = useHistory();
     const dispatch = useDispatch();
+    
+    const { userId } = useSelector(state => state.auth);
 
     // STATE
     const [balancesList, setBalancesList] = useState([]);
@@ -28,7 +30,7 @@ const Balances = (props) => {
     const { sendRequest: getAllBalances, 
             status, 
             error, 
-            data: balances, } = useHttp(getMany.bind(null, apiEndpoint));
+            data: balances, } = useHttp(getMany.bind(null, apiEndpoint, { user_id: userId }));
 
     const sortedData = useMemo(() => 
         sortByField({type: 'descending', field: 'created_at', dataSource: balances}), 

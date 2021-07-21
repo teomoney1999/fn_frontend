@@ -23,13 +23,15 @@ const Transactions = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const { userId } = useSelector(state => state.auth);
+
     // STATE
     const [transactionsList, setTransactionsList] = useState([]);
 
     const { sendRequest: getAllTransactions, 
             status, 
             error, 
-            data: transactions, } = useHttp(getMany.bind(null, apiEndpoint));
+            data: transactions, } = useHttp(getMany.bind(null, apiEndpoint, { user_id: userId }));
 
     const sortedData = useMemo(() => 
         sortByField({type: 'descending', field: 'created_at', dataSource: transactionsList}), 

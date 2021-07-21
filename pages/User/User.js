@@ -17,14 +17,10 @@ const User = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const userId = useSelector(state => state.auth.userId); 
+    const {userId} = useSelector(state => state.auth); 
+    
+    const {info} = useSelector(state => state.user);
 
-    const info = useSelector(state => state.user.info);
-    const userInfoId = info ? info.id : null; 
-
-    useEffect(() => {
-
-    }, []);
 
     /* 
      * METHOD: GET SINGLE
@@ -33,44 +29,22 @@ const User = (props) => {
     // USER
     const [user, setUser] = useState({}); 
 
-    const { sendRequest: _readUser, 
-            // error: userError, status: readUserStatus, 
-            data: userData } = useHttp(getSingle.bind(null, apiEndpoint));
-    
+    // Get info from redux
     useEffect(() => {
         if (!userId) {
             setUser({}); 
             return; 
         } 
-        if (!userData) {
-            _readUser(userId); 
-        } else {
-            setUser(userData); 
-        }        
-    }, [userId, _readUser, userData]);
 
-    const updateUserHandler = () => {
+        setUser(info);    
 
-    }
+    }, [userId, info]);
 
-    // USER INFO
-    const [userInfo, setUserInfo] = useState({}); 
+    // const updateUserHandler = () => {
 
-    const { sendRequest: _readUserInfo, 
-        // error: userInfoError, status: readUserInfoStatus, 
-        data: userInfoData } = useHttp(getSingle.bind(null, 'userinfo'));
+    // }
 
-    useEffect(() => {
-        if (!userInfoId) {
-            setUserInfo({}); 
-            return; 
-        } 
-        if (!userInfoData) {
-            _readUserInfo(userInfoId); 
-        } else {
-            setUserInfo(userInfoData); 
-        }        
-    }, [userInfoId, _readUserInfo, userInfoData]);
+
 
     const notify = ({message, type, delay}) => {
         dispatch(notificationAction.notify({
@@ -85,18 +59,17 @@ const User = (props) => {
     return (
         <UserView 
             userId={ userId }
-            userInfoId={ userInfoId }
             user={ user }
-            userInfo={ userInfo }
             // error={ userError || userInfoError }
             // status={
-            //     (postStatus === 'completed') || 
-            //     (putStatus === 'completed') 
+            //     (readUserStatus === 'completed') || 
+            //     (readUserInfoStatus === 'completed') 
             //         ? "completed" : "pending" }
             // onUpdateUser={}
             // onUpdateUserInfo={}
             notify={ notify }
-            onGoBack={ goBackHandler }/>
+            onGoBack={ goBackHandler }
+        />
     );
 }
 

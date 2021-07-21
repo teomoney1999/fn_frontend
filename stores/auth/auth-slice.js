@@ -31,6 +31,8 @@ const authSlice = createSlice({
         }, 
         authorized(state, action) {
             state.token = state.userId = localStorage.getItem("token");
+            // Need to compare that token to the token save on redis
+            // Move this to auth-action.js
             state.isLoggedIn = state.token ? true : false;
         }
     }

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 // REACT ROUTER
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // REDUX
 // import { useSelector } from "react-redux";
@@ -22,7 +22,6 @@ import classes from './LoginView.module.css';
 
  
 const LoginView = (props) => {
-    const history = useHistory();
 
     // CUSTOM HOOK
     const { enteredValue: username, 
@@ -39,10 +38,7 @@ const LoginView = (props) => {
             inputBlurHandler: passwordInputBlurHanlder,
             reset: passwordReset } = useInput(Helper.passwordValidate);
     
-    let formIsValid = false;
-    if (usernameIsValid && passwordIsValid) {
-        formIsValid = true;
-    }
+    let formIsValid = usernameIsValid && passwordIsValid ? true : false;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -57,17 +53,19 @@ const LoginView = (props) => {
      */
     const submitHandler = (event) => {
         event.preventDefault(); 
-        setIsLoading(true);
         
-        if (formIsValid){
-            props.onLogin(username, password);
-            history.replace('/');
+        setIsLoading(true);
+
+
+        if (!formIsValid) {
+            props.notify({message: "Vui lòng điền đầy đủ thông tin!", type: 'danger'});
         } else {
-            props.onError();
+            props.onLogin(username, password);
         }
-      
-        usernameReset();
-        passwordReset();
+        
+        setIsLoading(false);
+        // usernameReset();
+        // passwordReset();
     }
 
 
@@ -101,7 +99,7 @@ const LoginView = (props) => {
                         label={ 'Mật khẩu' }
                         isValid={ passwordIsValid }
                         hasError={ passwordHasError }
-                        value={ password }
+                        // value={ password }
                         onChange={ passwordChangeHandler }
                         onBlur={ passwordInputBlurHanlder }
                         ref={ passwordInputRef }

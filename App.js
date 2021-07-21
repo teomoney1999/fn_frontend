@@ -8,10 +8,10 @@ import { getCurrentUserInfo } from './stores/user/user-action';
 // CUSTOM HOOK
 import useNotification from './hooks/use-notification';
 
+import './App.css';
 // UI
 import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner'; 
-import './App.css';
-
+// const LoadingSpinner = lazy(() => import('./UI/LoadingSpinner/LoadingSpinner'));
 // COMPONENT
 const Login = lazy(() => import('./pages/Login/Login'));
 const Signin = lazy(() => import('./pages/Signin/Signin'));
@@ -24,9 +24,9 @@ function App() {
   const isNotiVisible = useNotification();
   
   const auth = useSelector(state => state.auth); 
+
   const { info } = useSelector(state => state.user);
- 
-  const {isLoggedIn, token} = auth; 
+  const {isLoggedIn, token, userId} = auth; 
   
   // AUTHORIZATION
   useEffect(() => {
@@ -35,16 +35,18 @@ function App() {
 
   // USER INFO
   useEffect(() => {
-    dispatch(getCurrentUserInfo(token))
-  }, [token]);
+    console.log("Get current user");
+    dispatch(getCurrentUserInfo(token));
+  }, [dispatch, token]);
 
   // BALANCE
   const balance = useSelector(state => state.balance); 
   useEffect(() => {
+    if (!isLoggedIn) return;
     // CAN I MOVE IT TO SOMEWHERE ELSE (EX: BALANCE FOLDER)
     if (!balance.changed) {
       // FETCH BALANCE
-      dispatch(fetchBalance()); 
+      dispatch(fetchBalance(userId)); 
     } else {
       // CREATE NEW BALANCE
       const payload = {
@@ -53,14 +55,13 @@ function App() {
       }
       dispatch(createBalance(payload));
     }
-  }, [balance.changed]);
+  }, [isLoggedIn, balance.changed]);
 
 
   return (
     <Fragment>
-      {isNotiVisible && <Notification />}
-
       <Suspense fallback={<LoadingSpinner />}>
+        {isNotiVisible && <Notification />}
         <Switch>
           { !isLoggedIn && <Route path='/signin' render={ props => <Signin />} />}
           

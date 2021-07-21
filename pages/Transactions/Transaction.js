@@ -24,7 +24,6 @@ const Transaction = (props) => {
 
     const balance = useSelector(state => state.balance); 
 
-    
     /**
      * METHOD: POST 
      */
@@ -78,22 +77,26 @@ const Transaction = (props) => {
     const updateHandler = async (id, data) => {
         const response = await _update({...data, id}); 
 
-        const { amount: oldAmount, transaction_type: oldType } = transaction;
+        const { amount, transaction_type: oldType } = transaction;
+        const oldAmount = parseInt(amount)
         const { amount: newAmount, transaction_type: newType } = data;
 
-        if (newType === 'thu') {
-            if (oldType === 'thu') {
-                dispatch(balanceAction.add({amount: newAmount - parseInt(oldAmount)}));
-            } else {
-                dispatch(balanceAction.add({amount: newAmount + parseInt(oldAmount)}));
-            }
-        } else if (newType === 'chi') {
-            if (oldType === 'thu') {
-                dispatch(balanceAction.sub({amount: newAmount - parseInt(oldAmount)}));
-            } else {
-                dispatch(balanceAction.sub({amount: newAmount + parseInt(oldAmount)}));
-            }
+        if (newType === 'thu' && oldType === 'thu') {
+            dispatch(balanceAction.add({amount: newAmount - oldAmount}));
+        } 
+
+        else if (newType === 'thu' && oldType === 'chi') {
+            dispatch(balanceAction.add({amount: newAmount + oldAmount}));
         }
+
+        else if (newType === 'chi' && oldType === 'thu') {
+            dispatch(balanceAction.sub({amount: newAmount - oldAmount}));
+        }
+
+        else {
+            dispatch(balanceAction.sub({amount: newAmount + oldAmount}));
+        }
+        
         console.log("BALANCE CHANGED");
         
         history.push('/transactions');
@@ -110,11 +113,12 @@ const Transaction = (props) => {
         await _delete(id); 
 
         const { amount, transaction_type } = transaction;
+        const deleteAmount = parseInt(amount);
 
         if (transaction_type === 'thu') {
-            dispatch(balanceAction.sub({amount: amount}));
+            dispatch(balanceAction.sub({amount: deleteAmount}));
         } else if (transaction_type === 'chi') {
-            dispatch(balanceAction.add({amount: amount}));
+            dispatch(balanceAction.add({amount: deleteAmount}));
         }
             console.log("BALANCE CHANGED");
 

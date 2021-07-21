@@ -2,18 +2,22 @@
 import { userAction } from './user-slice';
 import { notificationAction } from '../notification-slice';
 // HELPER
-import { getMany } from '../../helpers/apiHelper';
+import { getSingle } from '../../helpers/apiHelper';
 
-const apiEndpoint = 'userinfo';
+const apiEndpoint = 'user';
 
 export const getCurrentUserInfo = (token) => {
     return async (dispatch) => {
         try {
-            const response = await getMany(apiEndpoint, {token: token}); 
+            if (!token) return;
+            
+            console.log('token', token);
 
-            const userInfo = response[0];
+            const response = await getSingle(apiEndpoint, token); 
 
-            dispatch(userAction.setUserInfo(userInfo));
+            console.log('userInfo From App.js', response);
+
+            dispatch(userAction.setUserInfo(response));
         } catch (error) {
             dispatch(notificationAction.notify({
                 message: error.message, 

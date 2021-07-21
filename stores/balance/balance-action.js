@@ -7,10 +7,10 @@ import { getMany, post } from '../../helpers/apiHelper';
 
 const apiEndpoint = 'balance';
 
-export const fetchBalance = () => {
+export const fetchBalance = (userId) => {
     return async (dispatch) => {
         try {
-            const response = await getMany(apiEndpoint, {get_latest: true}); 
+            const response = await getMany(apiEndpoint, {user_id: userId, get_latest: true}); 
 
             dispatch(balanceAction.setBalanceInfo(response[0]));
 
